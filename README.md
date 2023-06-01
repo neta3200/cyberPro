@@ -11,7 +11,9 @@ A project was developed for my computer security course HIT college.
 - Complexity settings and requirements of the login passwords are in the configuration file - passwordRequirements.json.
 
 
-Prepare in advanced: pip install django-extensions Werkzeug pip install pyOpenSSL
+Prepare in advanced: pip install django-extensions Werkzeug 
+pip install pyOpenSSL 
+pip install python-dotenv
 
 Windows Path for hosts file : C:\Windows\System32\drivers\etc
 Linux: /etc/hosts add to hosts file in your system: 127.0.0.1 cyber

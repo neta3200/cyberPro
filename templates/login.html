@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if tooManyAttemps %}
+  <p>Too mane failed attemps. Please talk with the administrator</p>
+{% else %}
+  <!--Login-->
+  <div id="secure-form-login" class="login">
+      <div class="login-triangle"></div>
+    <div class="login-container">
+      <form class="login-container" method="POST">
+        {% csrf_token %}
+        {{ login_form.as_p }}
+        <div class="col-xl-9 mx-auto">
+          <div class="col-xl-5 mx-auto" >
+
+            {% if badCred %}
+      <a style="color:red">Password not matched! Try again!</a><br>
+        {% endif %}
+
+            <input class="button large secondary" type="submit" value="Login &raquo;" />
+          </div>
+        </div>
+      </form>
+      <p><a href="/forgot-pwd ">Forgot password?</a></p>
+    </div>
+  </div>
+
+
+  <div id="insecure-form-login">
+    <form method='GET'>
+        <p style="display:inline;"> Username: </p><input type='text' name='username'  required/> <br><br>
+        <p style="display:inline;"> Password: </p><input type='text' name='password' required/> <br><br>
+        {% if badPass %}
+      <a style="color:red">Password not matched! Try again!</a><br>
+        {% endif %}
+    <input class="button large secondary" type="submit" value="Login &raquo;" />
+    </form>
+    <p><a href="/forgot-pwd ">Forgot password?</a></p>
+
+    </div>
+
+
+    {% if users %}
+      {% for user in users %}
+
+      <h4> {{ user.username }} </h2>
+      <h4> {{ user.password }} </h2>
+
+      {% endfor %}
+    {% endif %}
+
+  {% endif %}
+{% endblock %}

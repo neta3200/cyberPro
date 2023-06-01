@@ -1,0 +1,15 @@
+{% autoescape off %}
+To initiate the password resetting process for your {{ user.get_username }} Communication LTD Account,
+kindly click on the link below:
+
+{{ protocol }}://{{ domain }}{{url}}
+
+Kindly enter the following code:
+{{hashed_code}}
+
+Should clicking the link above does not work, please copy and paste the URL in a new browser
+window instead.
+
+Sincerely,
+Communication LTD
+{% endautoescape %}

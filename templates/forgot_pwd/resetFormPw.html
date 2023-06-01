@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ 
+    <p>Enter your email address and username below, and we send you instructions for setting a new one password</p>
+
+    <form method="POST">
+        {{ form.as_p }} {% csrf_token %}
+        <input class="button large secondary" type="submit" value="Send me instructions! &raquo;" />
+    </form>
+
+{% endblock %}

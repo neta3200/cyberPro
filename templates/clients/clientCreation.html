@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div id="insecure-form"> 
+<form method='GET'> 
+    <p style="display:inline;"> First Name: </p><input type='text' name='fname' placeholder="Client First Name" required/> <br><br>
+    <p style="display:inline;"> Last Name: </p><input type='text' name='lname' placeholder="Client Last Name" required/> <br><br>
+    <p style="display:inline;"> Internet Speed (MB): </p><input type='text' name='internetspeed' placeholder="Client Internet Speed" required/> <br><br>
+<input class="button large secondary" type="submit" value="Save &raquo;" />
+</form>
+</div>
+
+<div id="secure-form"> 
+<form method='POST'> {% csrf_token %}
+    <p style="display:inline;"> First Name: </p><input type='text' name='fname' placeholder="Client First Name" required/> <br><br>
+    <p style="display:inline;"> Last Name: </p><input type='text' name='lname' placeholder="Client Last Name" required/> <br><br>
+    <p style="display:inline;"> Internet Speed (MB): </p><input type='text' name='internetspeed' placeholder="Client Internet Speed" required/> <br><br>
+    <input class="button large secondary" type="submit" value="Save &raquo;" />
+    </form>
+</div>
+
+
+
+{% if client_fname or client_lname %}
+    {% if isSecure %} <!-- escaping ,parmeters is untrusted.-->
+    <h4> {{ client_fname }}  {{ client_lname }} has been added succesfully!</h2>
+    {% else %} <!-- not use escaping ,parmeters is trusted.-->
+    <h4> {{ client_fname | safe }}  {{ client_lname | safe }} has been added succesfully!</h2>
+    {% endif %}
+{% endif %}
+
+<h3> Last Client Added:</h3>
+{% for client in c %}
+{% if isSecure == 'true' %} <!-- escaping ,parmeters is untrusted.-->
+<h3> Full Name: {{ client.name }} {{ client.lastName }} | Internet Speed: {{client.internetSpeed}} MB</h3> 
+{% else %} <!-- not use escaping ,parmeters is trusted.-->
+<h3> Full Name: {{ client.name | safe}} {{ client.lastName | safe}} | Internet Speed: {{client.internetSpeed | safe}} MB</h3>
+{% endif %}
+{% empty %}
+<h3>no clients </h3>
+{% endfor %}
+
+
+
+{% endblock %}
